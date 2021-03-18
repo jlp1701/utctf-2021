@@ -40,7 +40,7 @@ undefined4 main(void)
   exit(-1);
 }
 ```
-Basically, the user is queried for input from stdin. This input string is then transformed within the function `encode` and checked bytewise against a hardcoded string in memory.
+Basically, the user is queried for input from stdin. This input string is then transformed within the function `encode` and checked bytewise against a hardcoded string in memory (located at `0x00411010`).
 Only if the encoded input is equal to the memory string, the program prompts `Nice flag!`, which indicates, that we have to reconstruct the correct input resembling the actual flag.
 To achieve this, we need to semantically reverse the `encode` function and feed the hardcoded memory string into it. 
 The `encode` function looks like this:
@@ -85,7 +85,7 @@ The function consists of one big while loop which iterates through all input cha
 2. XOR current byte with fixed value depending on switch case
 3. XOR current and next byte (if available)
 
-The first part is an obfuscation of the switch-case integer. When inspecting carefully, we see that `i` is always greater zero, thus `t` is always `0x0`. The whole expression boils down to `t = i & 0x3`. So the lower two bits select the switch-case.
+The first part is an obfuscation of the switch-case integer. When inspecting carefully, we see that `i` is always greater zero, thus `t` is always `0x0`. The whole expression boils down to `t = i & 0x3`. So the lower two bits select the switch-case. Note: If the expression would be more complex, we could use SMT-Solvers to simplify the expression.
 
 Within the second part, the current byte simply gets XOR-ed with one of the four static numbers.
 
