@@ -1,9 +1,9 @@
 # peeb-boop
 
-Description: "Computers usually go beep boop, but I found this weird computer that goes peeb poob."
+### Description: 
+"Computers usually go beep boop, but I found this weird computer that goes peeb poob."
 
----
-
+### Analysis
 One binary file is provided. It seems like a regular ELF and so it is but it cannot be executed on a x86-64 machine. The error `./peeb_poob: cannot execute binary file: Exec format error` is given. 
 Inspecting the ELF header with `readelf peeb_poob -h` reveals that it is compiled for `Renesas / SuperH SH` architecture.
 
