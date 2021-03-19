@@ -20,9 +20,9 @@ frames = []
 frames = decode_str(inp_str)  # returns a list of tetris frames
 
 write_file("TETR")  # file header
-for b in frames:
+for f in frames:
     write_file("F0")  # begin of a tetris frame
-    write_file(encode_frame_run_len(b))
+    write_file(encode_frame_run_len(f))
     write_file("F1")  # end of a tetris frame
 
 ```
