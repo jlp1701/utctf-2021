@@ -27,7 +27,7 @@ for b in frames:
 
 ```
 
-The structure of a run-length encoded tetris frame is ([] symbolizes one byte and is not part of the actual encoding) `[F0][t][s0][s1][s2][s3][F1]` with t indicating the tile type and s is a 4 byte-long integer (little-endian) which give the repetition count of the symbol t.
+The structure of a run-length encoded tetris frame is (`[]` symbolizes one byte and is not part of the actual encoding) `[F0][t][s0][s1][s2][s3][F1]` with t indicating the tile type and s is a 4 byte-long integer (little-endian) which give the repetition count of the symbol t.
 
 For example, a empty frame (dimensions: 10x24) would be encoded as: `F0 00 F0 00 00 00 F1`. Where the type `t` can be one of the following:
 ```
@@ -44,5 +44,5 @@ Tile types:
 ```
 
 We could reverse engineer the whole program, including `encode_frame_run_len` and `decode` functions to compute the actual flag. I could not find any good source which describes the v115 encoding so I just reversed the simpler run-length encoding in the files to recover the actual tetris frames and then stick them into the given [creation tool](https://harddrop.com/fumen/) manually.
-The script [](decode_tetr.py) implements the run-length reversing and prints all tetris frames to stdout. Luckily, there are only 9 frames so manual insertion is not a big deal. The page the encodes the tetris frames into v115 encoding which is the desired flag.
+The script [decode_tetr.py](decode_tetr.py) implements the run-length reversing and prints all tetris frames to stdout. Luckily, there are only 9 frames so manual insertion is not a big deal. The page the encodes the tetris frames into v115 encoding which is the desired flag.
 
