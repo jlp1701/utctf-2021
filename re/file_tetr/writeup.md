@@ -22,7 +22,7 @@ frames = decode_str(inp_str)  # returns a list of tetris frames
 write_file("TETR")  # file header
 for b in frames:
     write_file("F0")  # begin of a tetris frame
-    write_file(encode_run_len(b))
+    write_file(encode_frame_run_len(b))
     write_file("F1")  # end of a tetris frame
 
 ```
@@ -31,6 +31,7 @@ The structure of a run-length encoded tetris frame is ([] symbolizes one byte an
 
 For example, a empty frame (dimensions: 10x24) would be encoded as: `F0 00 F0 00 00 00 F1`. Where the type `t` can be one of the following:
 ```
+Tile types:
 0 --> " " (emtpy)
 1 --> "I" (line piece)
 2 --> "L" (L piece)
@@ -42,6 +43,6 @@ For example, a empty frame (dimensions: 10x24) would be encoded as: `F0 00 F0 00
 8 --> "X" (Gray)
 ```
 
-We could reverse engineer the whole program, including `encode_run_len` and `decode` functions to compute the actual flag. I could not find any good source which describes the v115 encoding so I just reversed the simpler run-length encoding in the files to recover the actual tetris frames and then stick them into the given [creation tool](https://harddrop.com/fumen/) manually.
+We could reverse engineer the whole program, including `encode_frame_run_len` and `decode` functions to compute the actual flag. I could not find any good source which describes the v115 encoding so I just reversed the simpler run-length encoding in the files to recover the actual tetris frames and then stick them into the given [creation tool](https://harddrop.com/fumen/) manually.
 The script [](decode_tetr.py) implements the run-length reversing and prints all tetris frames to stdout. Luckily, there are only 9 frames so manual insertion is not a big deal. The page the encodes the tetris frames into v115 encoding which is the desired flag.
 
