@@ -57,14 +57,16 @@ Several tools and frameworks are available to build and train a classifier model
 
 * **Inspect the dataset**:
 Make sure you have added a row on top to name each column. Otherwise weka refuses to accept the dataset. To load the lab.csv into weka, open the *Explorer*, click *Open file ...*, select the csv file and click *Open*.
-![Image](figures/weka_load_data.png)
+![Load data with weka](figures/weka_load_data.png)
 
 * **Evaluate and select features**
 Change to column *Select attributes*. Change the attribute evaluator to the desired method (I chose *InfoGainAttributeEval*). Acknowledge the ranker message with *yes*. On the left side, choose *Cross-validation* as the selection mode and in the drop-down menu below, choose the last entry as class attribute (*cat* in my case). Click *Start*. In the window on the right, we can see the output of the selection process. With this evaluation method, the attributes of column 5 and 35 have the biggest merit.
+![Ranked attributes](figures/weka_rank_attributes.png)
 
 * **Construct a classifier based on decision rules**
 First we check our results by visualizing the whole data set (lab + target) with respect of the attributes 5 and 35, and its classes m, p, d:
 Append the target vectors to the lab vectors and insert a `?` in the class column so signal weka an unknown class. Load the csv as described in 1. Click on the column *Visualize*. In the settings below the plot matrix, click *Select Attributes*. Select the attributes 5 and 35 and click *OK* and then *Update*. Left-click on the top-left picture in the plot matrix to open it in a separate window.
+![Attribute plot](figures/weka_attribute_5_35_plot.png)
 It shows a plot with attribute 5 as x-axis and attribute 35 as y-axis. `p`, `m` and `d` vectors are colorized in blue, red and green respectively. Additionally, all unclassified target vectors are indicated as gray `M` symbols. The picture perfectly visualized the the three clusters of each class. All unclassified data correlate with the clusters and both attributes are sufficient to correctly classify the data. 
 Decision-rule-based classifiers means, that we have a set of relational decisions (`<`, `<=`, `>`, `>=`) in a tree structure to classify data.
 In our example, we set up two rules:
